@@ -1,0 +1,11 @@
+[0219/143101.816:INFO:CONSOLE(0)] "Autofocus processing was blocked because a document already has a focused element.", source: https://www.google.com/?gws_rd=ssl (0)
+[0219/143105.773:WARNING:frame_impl.cc(423)] SendProcessMessage sent to detached frame 17179869185 [4,1] will be ignored
+[0219/143227.852:INFO:CONSOLE(0)] "Unchecked runtime.lastError: Not implemented", source: chrome-extension://mhjfbmdgcfjbbpaeojofohoefgiehjai/index.html (0)
+[0219/143544.658:ERROR:interface_endpoint_client.cc(658)] Message 6 rejected by interface blink.mojom.WidgetHost
+[0219/143544.659:ERROR:interface_endpoint_client.cc(658)] Message 7 rejected by interface blink.mojom.WidgetHost
+[0219/143828.501:WARNING:browser_info.cc(301)] Returning a speculative frame for 21474836485 [5,5]
+[0219/143828.627:WARNING:browser_info.cc(301)] Returning a speculative frame for 21474836485 [5,5]
+[0219/143828.627:WARNING:browser_info.cc(301)] Returning a speculative frame for 21474836485 [5,5]
+[0219/143828.627:WARNING:browser_info.cc(301)] Returning a speculative frame for 21474836485 [5,5]
+[0219/143828.628:WARNING:browser_info.cc(301)] Returning a speculative frame for 21474836485 [5,5]
+[0219/143857.588:WARNING:frame_impl.cc(423)] SendProcessMessage sent to detached frame 17179869185 [4,1] will be ignored

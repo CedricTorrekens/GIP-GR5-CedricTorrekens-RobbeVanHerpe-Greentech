@@ -1,0 +1,88 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\0 - School\\GIP\\GIP-GR5-CedricTorrekens-RobbeVanHerpe-Greentech\\GIP-GR5-CedricTorrekens-RobbeVanHerpe-Greentech\\GIP-GR5-CedricTorrekens-RobbeVanHerpe-Greentech.csproj": {}
+  },
+  "projects": {
+    "E:\\0 - School\\GIP\\GIP-GR5-CedricTorrekens-RobbeVanHerpe-Greentech\\GIP-GR5-CedricTorrekens-RobbeVanHerpe-Greentech\\GIP-GR5-CedricTorrekens-RobbeVanHerpe-Greentech.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\0 - School\\GIP\\GIP-GR5-CedricTorrekens-RobbeVanHerpe-Greentech\\GIP-GR5-CedricTorrekens-RobbeVanHerpe-Greentech\\GIP-GR5-CedricTorrekens-RobbeVanHerpe-Greentech.csproj",
+        "projectName": "GIP-GR5-CedricTorrekens-RobbeVanHerpe-Greentech",
+        "projectPath": "E:\\0 - School\\GIP\\GIP-GR5-CedricTorrekens-RobbeVanHerpe-Greentech\\GIP-GR5-CedricTorrekens-RobbeVanHerpe-Greentech\\GIP-GR5-CedricTorrekens-RobbeVanHerpe-Greentech.csproj",
+        "packagesPath": "C:\\Users\\cedri\\.nuget\\packages\\",
+        "outputPath": "E:\\0 - School\\GIP\\GIP-GR5-CedricTorrekens-RobbeVanHerpe-Greentech\\GIP-GR5-CedricTorrekens-RobbeVanHerpe-Greentech\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\cedri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "dependencies": {
+            "Extended.Wpf.Toolkit": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
+            "InteractiveDataDisplay.WPF": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "Microsoft.VCRTForwarders.140": {
+              "target": "Package",
+              "version": "[1.0.6, )"
+            },
+            "Microsoft.Web.WebView2": {
+              "target": "Package",
+              "version": "[1.0.1108.44, )"
+            },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.28, )"
+            },
+            "WpfAnimatedGif": {
+              "target": "Package",
+              "version": "[2.0.2, )"
+            }
+          },
+          "imports": [
+            "uap10.0.18362"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

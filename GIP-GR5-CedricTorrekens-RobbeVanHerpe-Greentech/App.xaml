@@ -1,0 +1,9 @@
+﻿<Application x:Class="GIP_GR5_CedricTorrekens_RobbeVanHerpe_Greentech.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:GIP_GR5_CedricTorrekens_RobbeVanHerpe_Greentech"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
