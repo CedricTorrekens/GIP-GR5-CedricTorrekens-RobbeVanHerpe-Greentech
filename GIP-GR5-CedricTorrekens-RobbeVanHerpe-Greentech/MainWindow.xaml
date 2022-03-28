@@ -80,10 +80,10 @@
             <StackPanel>
                 <Image Source="logoEcoRoute.png" Margin="50,15,50,0" Height="130"/>
                 <TextBlock Text="Email" Margin="30,15,0,0" FontFamily="Open Sans SemiBold" FontSize="14"/>
-                <TextBox VerticalContentAlignment="Center" Height="30" Margin="30,5,30,0" Background="{x:Null}" AutomationProperties.HelpText="Email" FontFamily="Open Sans" VerticalAlignment="Center" FontSize="14" Template="{DynamicResource TextBoxBaseControlTemplate}"/>
+                <TextBox x:Name="txtEmail" VerticalContentAlignment="Center" Height="30" Margin="30,5,30,0" Background="{x:Null}" AutomationProperties.HelpText="Email" FontFamily="Open Sans" VerticalAlignment="Center" FontSize="14" Template="{DynamicResource TextBoxBaseControlTemplate}"/>
 
                 <TextBlock Text="Password" Margin="30,15,0,0" FontFamily="Open Sans SemiBold" FontSize="14"/>
-                <PasswordBox VerticalContentAlignment="Center" Height="30" FontFamily="Open Sans" VerticalAlignment="Center" FontSize="14" Background="{x:Null}" Margin="30,5,30,0" Template="{DynamicResource PasswordBox}" />
+                <PasswordBox x:Name="txtPassword" VerticalContentAlignment="Center" Height="30" FontFamily="Open Sans" VerticalAlignment="Center" FontSize="14" Background="{x:Null}" Margin="30,5,30,0" Template="{DynamicResource PasswordBox}" />
                 <TextBlock Text="Forgot?" Margin="35,3,35,0" FontFamily="Open Sans Condensed" FontSize="14" TextAlignment="Right" FontStyle="Italic" Cursor="Hand"/>
 
                 <Button x:Name="btnSignIn" Content="Sign In" FontFamily="Open Sans" FontSize="16" Margin="30,20,30,0"  Background="#FFCDCDCD" BorderBrush="Black" Opacity="0.9" Foreground="Black" Height="35" Cursor="Hand" Click="btnSignInClick">

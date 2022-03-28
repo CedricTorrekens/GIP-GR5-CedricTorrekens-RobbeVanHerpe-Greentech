@@ -41,7 +41,10 @@ namespace GIP_GR5_CedricTorrekens_RobbeVanHerpe_Greentech
         {
             InitializeComponent();
 
-            WebPageMap.Source = new Uri(string.Format("file:///{0}/MapPage.html", Directory.GetCurrentDirectory()));
+            WebPageMap.Source = new Uri("http://5.189.173.7/MapPage.php?id=" + BusinessLayer.propUserId);
+
+
+
 
         }
 

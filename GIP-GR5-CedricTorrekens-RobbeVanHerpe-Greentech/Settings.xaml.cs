@@ -45,7 +45,6 @@ namespace GIP_GR5_CedricTorrekens_RobbeVanHerpe_Greentech
         {
             InitializeComponent();
 
-
             con.connection();
             cmd = new MySqlCommand("SELECT * FROM picture WHERE empid = '4'", con.con);
             reader = cmd.ExecuteReader();

@@ -15,6 +15,7 @@ using EO.Wpf.Gauge.Shapes;
 using EO.Wpf.Primitives;
 using GIP_GR5_CedricTorrekens_RobbeVanHerpe_Greentech;
 using Microsoft.Web.WebView2.Wpf;
+using ScottPlot;
 using System;
 using System.Diagnostics;
 using System.Windows;

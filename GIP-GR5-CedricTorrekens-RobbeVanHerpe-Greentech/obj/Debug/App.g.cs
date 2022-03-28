@@ -10,6 +10,7 @@
 //------------------------------------------------------------------------------
 
 using GIP_GR5_CedricTorrekens_RobbeVanHerpe_Greentech;
+using ScottPlot;
 using System;
 using System.Diagnostics;
 using System.Windows;

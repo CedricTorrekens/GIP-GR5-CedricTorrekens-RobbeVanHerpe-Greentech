@@ -112,12 +112,17 @@
     <Compile Include="AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BusinessLayer.cs" />
     <Compile Include="connect.cs" />
     <Compile Include="DataGraph.xaml.cs">
       <DependentUpon>DataGraph.xaml</DependentUpon>
     </Compile>
     <Compile Include="Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="loadingData.xaml.cs">
+      <DependentUpon>loadingData.xaml</DependentUpon>
     </Compile>
     <Compile Include="Map.xaml.cs">
       <DependentUpon>Map.xaml</DependentUpon>
@@ -152,6 +157,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="loadingData.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -259,6 +268,7 @@
     <TypeScriptCompile Include="types\MicrosoftMaps\Modules\WellKnownText.d.ts" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MapPage.php" />
     <Resource Include="spinning-loading.gif" />
     <Resource Include="Icons\location-pin.png" />
     <Resource Include="Icons\blank-profile-picture.png" />
@@ -266,7 +276,7 @@
     <Resource Include="Icons\approve.png" />
     <Resource Include="Icons\attention.png" />
     <Resource Include="Icons\exit.png" />
-    <Content Include="MapPage.html">
+    <Content Include="mail.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -277,11 +287,23 @@
     <PackageReference Include="InteractiveDataDisplay.WPF">
       <Version>1.0.0</Version>
     </PackageReference>
+    <PackageReference Include="LiveCharts.Geared">
+      <Version>1.2.9</Version>
+    </PackageReference>
+    <PackageReference Include="MailKit">
+      <Version>3.1.1</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Web.WebView2">
       <Version>1.0.1108.44</Version>
     </PackageReference>
     <PackageReference Include="MySql.Data">
       <Version>8.0.28</Version>
+    </PackageReference>
+    <PackageReference Include="OxyPlot.Wpf">
+      <Version>2.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="ScottPlot.WPF">
+      <Version>4.1.35</Version>
     </PackageReference>
     <PackageReference Include="WpfAnimatedGif">
       <Version>2.0.2</Version>

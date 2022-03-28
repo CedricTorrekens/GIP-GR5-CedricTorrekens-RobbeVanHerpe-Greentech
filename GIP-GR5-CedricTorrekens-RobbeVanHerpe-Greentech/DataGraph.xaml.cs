@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -14,11 +15,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using InteractiveDataDisplay.WPF;
-using LiveCharts;
-using LiveCharts.Defaults;
-using LiveCharts.Wpf;
-
+using MySql.Data.MySqlClient;
+using OxyPlot;
+using OxyPlot.Axes;
+using OxyPlot.Legends;
+using OxyPlot.Series;
 
 namespace GIP_GR5_CedricTorrekens_RobbeVanHerpe_Greentech
 {
@@ -40,132 +41,208 @@ namespace GIP_GR5_CedricTorrekens_RobbeVanHerpe_Greentech
 
     public partial class DataGraph : Page
     {
-        private ZoomingOptions _zoomingMode;
+
+        connect con = new connect();
 
         public DataGraph()
         {
             InitializeComponent();
-
-            var gradientBrush = new LinearGradientBrush
-            {
-                StartPoint = new Point(0, 0),
-                EndPoint = new Point(0, 1)
-            };
-            gradientBrush.GradientStops.Add(new GradientStop(Colors.Transparent, 0));
-            gradientBrush.GradientStops.Add(new GradientStop(Colors.Transparent, 1));
-
+            /*
             SeriesCollection = new SeriesCollection
             {
                 new LineSeries
                 {
-                    Title = "pm 2.5",
-                    Values = GetData(),
-                    Fill = gradientBrush,
-                    StrokeThickness = 2
+                    Title = "PM 2.5",
+                    Values = GetPM25Data(),
+                    PointGeometry = null
                 },
                 new LineSeries
                 {
-                    Title = "pm 10",
-                    Values = GetData(),
-                    Fill = gradientBrush,
-                    StrokeThickness = 2
-                },
-                new LineSeries
-                {
-                    Title = "Humidity",
-                    Values = GetData(),
-                    Fill = gradientBrush,
-                    StrokeThickness = 2
+                    Title = "PM 10",
+                    Values = GetPM10Data(),
+                    PointGeometry = null
                 },
                 new LineSeries
                 {
                     Title = "Temperature",
-                    Values = GetData(),
-                    Fill = gradientBrush,
-                    StrokeThickness = 2
+                    Values = GetTemperatureData(),
+                    PointGeometry = null
                 }
             };
 
-            ZoomingMode = ZoomingOptions.X;
+            //Labels = new[] { "", "Feb", "Mar", "Apr", "May" };
+            XFormatter = val => new DateTime((long)val).ToString("HH:mm");
+            YFormatter = value => value.ToString();
 
-            XFormatter = val => new DateTime((long)val).ToString("dd MMM");
-            YFormatter = val => val.ToString("");
+            DataContext = this;
+            */
 
             DataContext = this;
 
 
+            Model1 = new PlotModel();
+            Model1.Title = "PM 2.5";
+            Model1.Legends.Add(new Legend()
+            {
+                LegendPosition = LegendPosition.TopCenter,
+                LegendOrientation = LegendOrientation.Horizontal,
+                LegendPlacement = LegendPlacement.Outside,
+            });
+
+            Model1.Axes.Add(new DateTimeAxis { Position = AxisPosition.Bottom, StringFormat = "dd/MM/yyyy HH:mm" });
+
+
+            FunctionSeries data1 = new FunctionSeries();
+            data1.Title = "PM 2.5";
+            FunctionSeries data2 = new FunctionSeries();
+            data2.Title = "PM 10";
+            FunctionSeries data3 = new FunctionSeries();
+            data3.Title = "Humidity";
+            FunctionSeries data4 = new FunctionSeries();
+            data4.Title = "Temperature";
+
+            con.connection();
+            MySqlDataAdapter adapter = new MySqlDataAdapter(SQLScripts.sqlData, con.con);
+
+            DataSet ds = new DataSet();
+            ds.Clear();
+            adapter.Fill(ds, "MijnTabel");
+
+            foreach (DataRow row in ds.Tables[0].Rows)
+            {
+                Console.WriteLine(DateTime.Parse(Convert.ToString(row.ItemArray[1])));
+                data1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Parse(Convert.ToString(row.ItemArray[1]))), Convert.ToDouble(row.ItemArray[2])));
+                data2.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Parse(Convert.ToString(row.ItemArray[1]))), Convert.ToDouble(row.ItemArray[3])));
+                data3.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Parse(Convert.ToString(row.ItemArray[1]))), Convert.ToDouble(row.ItemArray[4])));
+                data4.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Parse(Convert.ToString(row.ItemArray[1]))), Convert.ToDouble(row.ItemArray[5])));
+            }
+
+            Model1.Series.Add(data1);
+            Model1.Series.Add(data2);
+            Model1.Series.Add(data3);
+            Model1.Series.Add(data4);
+
+
+            //Model1 = CreateModel("Model 1");
+            Model2 = CreateModel("Model 2");
+            Model3 = CreateModel("Model 3");
+
         }
 
+        /// <summary>
+        /// Gets the left model.
+        /// </summary>
+        public PlotModel Model1 { get; private set; }
+
+        /// <summary>
+        /// Gets the right-top model.
+        /// </summary>
+        public PlotModel Model2 { get; private set; }
+
+        /// <summary>
+        /// Gets the right-bottom model.
+        /// </summary>
+        public PlotModel Model3 { get; private set; }
+
+        /// <summary>
+        /// Creates a sample model.
+        /// </summary>
+        /// <param name="title">The title.</param>
+        /// <returns>A <see cref="PlotModel" />.</returns>
+        private static PlotModel CreateModel(string title)
+        {
+            var model = new PlotModel { Title = title };
+            model.Axes.Add(new LinearAxis { Position = OxyPlot.Axes.AxisPosition.Left });
+            model.Axes.Add(new LinearAxis { Position = OxyPlot.Axes.AxisPosition.Bottom });
+            model.Series.Add(new FunctionSeries(Math.Sin, 0, 10, 1000));
+            model.Series.Add(new FunctionSeries(x => Math.Sin(x) / x, 0, 10, 1000));
+            return model;
+        }
+
+
+        /*
         public SeriesCollection SeriesCollection { get; set; }
         public Func<double, string> XFormatter { get; set; }
         public Func<double, string> YFormatter { get; set; }
         
-        public ZoomingOptions ZoomingMode
+        private ChartValues<DateTimePoint> GetPM25Data()
         {
-            get { return _zoomingMode; }
-            set
-            {
-                _zoomingMode = value;
-                OnPropertyChanged();
-            }
-        }
-        
-        private void ToogleZoomingMode(object sender, RoutedEventArgs e)
-        {
-            switch (ZoomingMode)
-            {
-                case ZoomingOptions.None:
-                    ZoomingMode = ZoomingOptions.X;
-                    break;
-                case ZoomingOptions.X:
-                    ZoomingMode = ZoomingOptions.Y;
-                    break;
-                case ZoomingOptions.Y:
-                    ZoomingMode = ZoomingOptions.Xy;
-                    break;
-                case ZoomingOptions.Xy:
-                    ZoomingMode = ZoomingOptions.None;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private ChartValues<DateTimePoint> GetData()
-        {
-            var r = new Random();
-            var trend = 100;
             var values = new ChartValues<DateTimePoint>();
 
-            for (var i = 0; i < 100; i++)
+            con.connection();
+            MySqlDataAdapter adapter = new MySqlDataAdapter(SQLScripts.sqlData, con.con);
+
+            DataSet ds = new DataSet();
+            ds.Clear();
+            adapter.Fill(ds, "MijnTabel");
+
+            foreach (DataRow row in ds.Tables[0].Rows)
             {
-                var seed = r.NextDouble();
-                if (seed > .8) trend += seed > .9 ? 50 : -50;
-                values.Add(new DateTimePoint(DateTime.Now.AddDays(i), trend + r.Next(0, 10)));
+                Console.WriteLine(DateTime.Parse(Convert.ToString(row.ItemArray[1])));
+                //values.Add(new DateTimePoint(DateTime.Parse(Convert.ToString(row.ItemArray[1])), Convert.ToDouble(row.ItemArray[2])));
+                
+            }
+
+            return values;
+        }
+        
+        private ChartValues<DateTimePoint> GetPM10Data()
+        {
+            var values = new ChartValues<DateTimePoint>();
+
+            con.connection();
+            MySqlDataAdapter adapter = new MySqlDataAdapter(SQLScripts.sqlData, con.con);
+
+            DataSet ds = new DataSet();
+            ds.Clear();
+            adapter.Fill(ds, "MijnTabel");
+
+            foreach (DataRow row in ds.Tables[0].Rows)
+            {
+                values.Add(new DateTimePoint(DateTime.Parse(Convert.ToString(row.ItemArray[1])), Convert.ToDouble(row.ItemArray[3])));
             }
 
             return values;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName = null)
+        private ChartValues<DateTimePoint> GetHumidityData()
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            var values = new ChartValues<DateTimePoint>();
+
+            con.connection();
+            MySqlDataAdapter adapter = new MySqlDataAdapter(SQLScripts.sqlData, con.con);
+
+            DataSet ds = new DataSet();
+            ds.Clear();
+            adapter.Fill(ds, "MijnTabel");
+
+            foreach (DataRow row in ds.Tables[0].Rows)
+            {
+                values.Add(new DateTimePoint(DateTime.Parse(Convert.ToString(row.ItemArray[1])), Convert.ToDouble(row.ItemArray[4])));
+            }
+
+            return values;
         }
 
-        private void ResetZoomOnClick(object sender, RoutedEventArgs e)
+        private ChartValues<DateTimePoint> GetTemperatureData()
         {
-            //Use the axis MinValue/MaxValue properties to specify the values to display.
-            //use double.Nan to clear it.
+            var values = new ChartValues<DateTimePoint>();
 
-            X.MinValue = double.NaN;
-            X.MaxValue = double.NaN;
-            Y.MinValue = double.NaN;
-            Y.MaxValue = double.NaN;
+            con.connection();
+            MySqlDataAdapter adapter = new MySqlDataAdapter(SQLScripts.sqlData, con.con);
+
+            DataSet ds = new DataSet();
+            ds.Clear();
+            adapter.Fill(ds, "MijnTabel");
+
+            foreach (DataRow row in ds.Tables[0].Rows)
+            {
+                values.Add(new DateTimePoint(DateTime.Parse(Convert.ToString(row.ItemArray[1])), Convert.ToDouble(row.ItemArray[5])));
+            }
+
+            return values;
         }
-
-
+        */
 
         private void ViewSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -180,38 +257,14 @@ namespace GIP_GR5_CedricTorrekens_RobbeVanHerpe_Greentech
                 dgvData.Visibility = Visibility.Visible;
             }
         }
-
+        
         private void btnSearchData_Click(object sender, RoutedEventArgs e)
         {
             SearchPopup popup = new SearchPopup();
             popup.Show();
         }
+        
     }
 
-
-    public class ZoomingModeCoverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            switch ((ZoomingOptions)value)
-            {
-                case ZoomingOptions.None:
-                    return "None";
-                case ZoomingOptions.X:
-                    return "X";
-                case ZoomingOptions.Y:
-                    return "Y";
-                case ZoomingOptions.Xy:
-                    return "XY";
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
+    
 }

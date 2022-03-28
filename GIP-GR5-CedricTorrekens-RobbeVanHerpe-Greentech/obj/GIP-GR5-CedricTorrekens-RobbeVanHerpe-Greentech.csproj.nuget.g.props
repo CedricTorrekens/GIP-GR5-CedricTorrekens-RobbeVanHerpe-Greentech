@@ -18,7 +18,10 @@
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgScottPlot_WPF Condition=" '$(PkgScottPlot_WPF)' == '' ">C:\Users\cedri\.nuget\packages\scottplot.wpf\4.1.35</PkgScottPlot_WPF>
     <PkgMicrosoft_Web_WebView2 Condition=" '$(PkgMicrosoft_Web_WebView2)' == '' ">C:\Users\cedri\.nuget\packages\microsoft.web.webview2\1.0.1108.44</PkgMicrosoft_Web_WebView2>
+    <PkgLiveCharts_Wpf Condition=" '$(PkgLiveCharts_Wpf)' == '' ">C:\Users\cedri\.nuget\packages\livecharts.wpf\0.9.7</PkgLiveCharts_Wpf>
+    <PkgLiveCharts_Geared Condition=" '$(PkgLiveCharts_Geared)' == '' ">C:\Users\cedri\.nuget\packages\livecharts.geared\1.2.9</PkgLiveCharts_Geared>
     <PkgExtended_Wpf_Toolkit Condition=" '$(PkgExtended_Wpf_Toolkit)' == '' ">C:\Users\cedri\.nuget\packages\extended.wpf.toolkit\4.2.0</PkgExtended_Wpf_Toolkit>
   </PropertyGroup>
 </Project>

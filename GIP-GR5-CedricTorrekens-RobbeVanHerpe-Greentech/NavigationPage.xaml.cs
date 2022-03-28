@@ -45,10 +45,10 @@ namespace GIP_GR5_CedricTorrekens_RobbeVanHerpe_Greentech
         {
             InitializeComponent();
 
-
+            
             Home page = new Home();
             Main.Content = page;
-
+            
         }
 
 
@@ -94,6 +94,11 @@ namespace GIP_GR5_CedricTorrekens_RobbeVanHerpe_Greentech
             signIn.Show();
             this.Close();
         }
+
+
+
+
+
     }
 
 }
